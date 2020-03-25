@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.interblocks.imobile.api.inapp.service.reg;
+package com.interblocks.imobile.api.inapp.service.registration;
 
 import com.interblocks.imobile.api.inapp.model.RegisterUserRequest;
 import com.interblocks.imobile.api.inapp.model.RegisterUserResponse;

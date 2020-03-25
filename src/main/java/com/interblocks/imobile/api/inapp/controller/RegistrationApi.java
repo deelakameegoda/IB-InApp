@@ -6,7 +6,7 @@
 package com.interblocks.imobile.api.inapp.controller;
 
 import com.interblocks.imobile.api.inapp.model.RegisterUserRequest;
-import com.interblocks.imobile.api.inapp.service.reg.RegistrationApiService;
+import com.interblocks.imobile.api.inapp.service.registration.RegistrationApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
