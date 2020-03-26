@@ -159,7 +159,7 @@ public class InAppCardServiceImpl implements InAppCardService {
                         now, DateTimeUtil.addYears(now, 250), "0", "0", "System",
                         now, "System", now, extUserDetails.getBnkDlUsrPK().getUsrId(),
                         extUserDetails.getBnkDlUsrPK().getBnkCode(),
-                        item.isIsDefault(), item.getCardHolderName(), item.getExpMonth(),
+                        item.isDefault(), item.getCardHolderName(), item.getExpMonth(),
                         item.getExpYear(), isCardNeedToBeActiveBeforeUse, otpExpTime,
                         item.getMaskedCardNumber(), index, item.getActivationOTP(), item.getCardRef(),
                         false, item.getCardBin());
@@ -171,7 +171,7 @@ public class InAppCardServiceImpl implements InAppCardService {
                     cardInsertRespErr.setCardRef("");
                     cardInsertRespErr.setCardType(item.getCardType());
                     cardInsertRespErr.setExepation("Error in card insert.");
-                    cardInsertRespErr.setIsDefault(item.isIsDefault());
+                    cardInsertRespErr.setIsDefault(item.isDefault());
                     cardInsertRespErr.setStatusCode("IB603");
                     cardInsertRespErr.setStatusDescription("ERROR");
                     cardInsertRespErr.setFailReason("Error in card insert.");
@@ -201,7 +201,7 @@ public class InAppCardServiceImpl implements InAppCardService {
                 cardInsertResp.setCardRef(cardData.getBnkDlAcct().getExtId());
                 cardInsertResp.setCardType(item.getCardType());
                 cardInsertResp.setExepation("");
-                cardInsertResp.setIsDefault(item.isIsDefault());
+                cardInsertResp.setIsDefault(item.isDefault());
                 cardInsertResp.setStatusCode("IB200");
                 cardInsertResp.setStatusDescription("SUCCESS");
                 cardInsertResp.setFailReason("");
@@ -567,12 +567,12 @@ public class InAppCardServiceImpl implements InAppCardService {
                 crd.setCardType(item.getAcctTyp().startsWith("OCP") ? item.getAcctTyp().split("-")[1] : item.getAcctTyp());
                 crd.setExpMonth(item.getBnkDlAcct().getExpMnth());
                 crd.setExpYear(item.getBnkDlAcct().getExpYear());
-                crd.setIsDefault(item.getBnkDlAcct().getIsDef().equals("Y"));
+                crd.setDefault(item.getBnkDlAcct().getIsDef().equals("Y"));
                 crd.setCardRef(item.getBnkDlAcct().getExtId());
-                crd.setIsActive(item.getBnkDlAcct().getDe02().equals("Y"));
+                crd.setActive(item.getBnkDlAcct().getDe02().equals("Y"));
                 crd.setIndex(item.getBnkDlAcct().getDe03());
                 crd.setMaskedCardNumber(item.getBnkDlAcct().getDe04());
-                crd.setIsExpired(isExpired(item.getBnkDlAcct().getExpYear(), item.getBnkDlAcct().getExpMnth()));
+                crd.setExpired(isExpired(item.getBnkDlAcct().getExpYear(), item.getBnkDlAcct().getExpMnth()));
                 crd.setCardBin(item.getBnkDlAcct().getCrdBin());
                 crd.setStatus(item.getStatCode().toString());
 
@@ -720,7 +720,7 @@ public class InAppCardServiceImpl implements InAppCardService {
                         now,
                         extUserDetails.getBnkDlUsrPK().getUsrId(),
                         extUserDetails.getBnkDlUsrPK().getBnkCode(),
-                        card.isIsDefault(),
+                        card.isDefault(),
                         card.getCardHolderName(),
                         card.getExpMonth(),
                         card.getExpYear(),
@@ -741,7 +741,7 @@ public class InAppCardServiceImpl implements InAppCardService {
                     cardInsertRespErr.setCardRef("");
                     cardInsertRespErr.setCardType(card.getCardType());
                     cardInsertRespErr.setExepation("Error in card insert.");
-                    cardInsertRespErr.setIsDefault(card.isIsDefault());
+                    cardInsertRespErr.setIsDefault(card.isDefault());
                     cardInsertRespErr.setStatusCode("IB603");
                     cardInsertRespErr.setStatusDescription("ERROR");
                     cardInsertRespErr.setFailReason("Error in card insert.");
@@ -770,7 +770,7 @@ public class InAppCardServiceImpl implements InAppCardService {
                 cardInsertResp.setCardRef(cardData.getBnkDlAcct().getExtId());
                 cardInsertResp.setCardType(card.getCardType());
                 cardInsertResp.setExepation("");
-                cardInsertResp.setIsDefault(card.isIsDefault());
+                cardInsertResp.setIsDefault(card.isDefault());
                 cardInsertResp.setStatusCode("IB200");
                 cardInsertResp.setStatusDescription("SUCCESS");
                 cardInsertResp.setFailReason("");

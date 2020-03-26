@@ -5,10 +5,10 @@ import com.interblocks.imobile.api.inapp.oauth.InappTokenCipher;
 import com.interblocks.imobile.api.inapp.service.card.CardManagementImpl;
 import com.interblocks.imobile.api.inapp.service.registration.RegistrationImpl;
 import com.interblocks.imobile.api.inapp.service.user.UserManagementImpl;
-import com.interblocks.imobile.subcomponents.inapp.InAppCardServiceImpl;
 import com.interblocks.imobile.subcomponents.inapp.InAppCardServiceImplTest;
 import com.interblocks.imobile.subcomponents.inapp.InAppRegistrationServiceImpl;
 import com.interblocks.imobile.subcomponents.inapp.InAppUserServiceImpl;
+import com.interblocks.imobile.testmocks.services.MockInAppCardServiceImpl;
 import com.interblocks.iwallet.adaptor.broker.BrokerClient;
 import com.interblocks.iwallet.adaptor.broker.BrokerCommunicator;
 import com.interblocks.iwallet.adaptor.broker.components.JAXBParser;
@@ -16,6 +16,7 @@ import com.interblocks.iwallet.adaptor.broker.config.ServiceBrokerClasses;
 import com.interblocks.iwallet.adaptor.communicators.card.CardServiceCommunicator;
 import com.interblocks.iwallet.adaptor.rest.admin.IAdminRestClientInappImpl;
 import com.interblocks.iwallet.adaptor.rest.client.RestClientImpl;
+import com.interblocks.iwallet.config.hazelcast.HazelcastConfig;
 import com.interblocks.iwallet.isodetails.builder.ISODetailsBuilder;
 import com.interblocks.iwallet.isodetails.builder.ISODetailsMapper;
 import com.interblocks.iwallet.isodetails.service.ISODetailsServiceImpl;
@@ -42,7 +43,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootTest(classes = {InAppCardServiceImplTest.class})
 @PropertySource(value = {"classpath:testapplication.properties"})
 @ComponentScan({
-        "com.hazelcast.core"
+        "com.hazelcast.core",
+        "com.interblocks.iwallet.subcomponents.cache",
+        "com.hazelcast.core.HazelcastInstance",
+        "com.interblocks.iwallet.config.hazelcast"
 })
 @EnableJpaRepositories({
         "com.interblocks.iwallet.repository"
@@ -63,8 +67,8 @@ public class SpringRuntime extends AbstractTransactionalTestNGSpringContextTests
         }
 
         @Bean
-        public InAppCardServiceImpl inAppCardService() {
-            return new InAppCardServiceImpl();
+        public MockInAppCardServiceImpl inAppCardService() {
+            return new MockInAppCardServiceImpl();
         }
 
         @Bean
@@ -100,6 +104,11 @@ public class SpringRuntime extends AbstractTransactionalTestNGSpringContextTests
         @Bean
         public CacheServiceImpl cacheService() {
             return new CacheServiceImpl();
+        }
+
+        @Bean
+        public HazelcastConfig hazelcastConfig() {
+            return new HazelcastConfig();
         }
 
         @Bean
